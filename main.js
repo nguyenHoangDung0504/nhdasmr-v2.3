@@ -122,10 +122,3 @@ async function getCSVData(url) {
 
     return csvData;
 }
-
-if ('serviceWorker' in navigator) {
-    console.log('Service Worker registering...');
-    navigator.serviceWorker.register('/cache.js')
-        .then(() => console.log('Service Worker registered.'))
-        .catch((err) => console.error('Service Worker registration failed:', err));
-}
