@@ -340,8 +340,8 @@ export default class App {
             });
         });
 
-        gacha10.addEventListener('click', () => gacha(this.dataset.count));
-        gacha1.addEventListener('click', () => gacha(this.dataset.count));
+        gacha10.addEventListener('click', function () { gacha(this.dataset.count) });
+        gacha1.addEventListener('click', function () { gacha(this.dataset.count) });
 
         function gacha(count) {
             const trackKeys = Database.getRandomTracksKey(count);
