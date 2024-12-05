@@ -1512,8 +1512,8 @@ input[type="text"].search::selection {
     }
 }
 
-body:has(.loader-modal.show) {
-    overflow: hidden;
+body:has(.loader-modal.show)::-webkit-scrollbar {
+    width: 0px;
 }
 
 .loader-modal {
