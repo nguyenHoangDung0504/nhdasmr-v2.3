@@ -68,7 +68,7 @@ export default class App {
                 }
             }
         }
-      
+
         function search(value) {
             const splittedValue = value.split('+').map(v => v.trim()).filter(v => v);
 
@@ -92,10 +92,10 @@ export default class App {
 
             let suggestions = Utils.filterUniqueObjects(splittedValue.reduce(
                 (arrOfSuggestion, v) => {
-                    return arrOfSuggestion.concat( Database.getSearchSuggestions(v) );
+                    return arrOfSuggestion.concat(Database.getSearchSuggestions(v));
                 }, []
             )).sort(Utils.sortSuggestionFn);
-            
+
             if (suggestions.length == 0) {
                 resultBox.innerHTML = `<a style="text-align:center;">-No Result-</a>`;
             } else {
@@ -103,7 +103,7 @@ export default class App {
             }
             Config.showResultBox();
         }
-      
+
         function developerSearch(value) {
             let active = false;
             if (value.indexOf('@') == -1)
@@ -178,7 +178,7 @@ export default class App {
                     panel.style.maxHeight = panel.scrollHeight + 'px';
                 }
             });
-            if(!Config.deviceIsMobile()) {
+            if (!Config.deviceIsMobile()) {
                 setTimeout(() => accordion.dispatchEvent(new Event('click')), 200);
             }
         });
@@ -233,7 +233,7 @@ export default class App {
         btnOpenCategoryModal.addEventListener('click', openCatgoriesModal);
         btnCloseCategoryModal.addEventListener('click', closeCatgoriesModal);
         categoriesModal.addEventListener('click', event => {
-            if(event.target.classList.contains('modal-container')) {
+            if (event.target.classList.contains('modal-container')) {
                 closeCatgoriesModal();
             }
         });
@@ -242,13 +242,13 @@ export default class App {
             categoriesModal.classList.add('open');
             document.body.classList.add('openModal');
         }
-      
+
         function closeCatgoriesModal() {
             categoriesModal.classList.remove('open');
             document.body.classList.remove('openModal');
         }
     }
-  
+
     // For gacha modal
     static buildGachaModalAction() {
         const gachaModal = document.querySelector('#gacha-modal');
@@ -257,12 +257,12 @@ export default class App {
         const btnCloseGachaModal = gachaModal.querySelector('#close-gacha-modal-btn');
         const gacha1 = gachaModal.querySelector('#gachaX1');
         const gacha10 = gachaModal.querySelector('#gachaX10');
-      
+
         gridGachaModal.innerHTML = ''; // Reset HTML
         btnOpenGachaModal.addEventListener('click', openGachaModal);
         btnCloseGachaModal.addEventListener('click', closeGachaModal);
         gachaModal.addEventListener('click', event => {
-            if(event.target.classList.contains('modal-container')) {
+            if (event.target.classList.contains('modal-container')) {
                 closeGachaModal();
             }
         });
@@ -278,11 +278,11 @@ export default class App {
 
         let onG10Anim = false;
         gacha10.addEventListener('click', () => {
-            if(onG10Anim) return;
+            if (onG10Anim) return;
 
             gacha10.classList.add('active');
             onG10Anim = true;
-            gacha10.addEventListener('transitionend', function() {
+            gacha10.addEventListener('transitionend', function () {
                 setTimeout(() => {
                     this.classList.remove('active');
                     this.style.setProperty('--transition-time', '.15s');
@@ -330,7 +330,7 @@ export default class App {
                 shard.animate([
                     { transform: 'translate(0, 0)', filter: 'brightness(1.5)', opacity: 1 },
                     { transform: `translate(${xTranslate}px, ${yTranslate}px) rotate(${180}deg)`, filter: 'brightness(1.5)', opacity: 1 },
-                    { transform: `translate(${xTranslate}px, ${yTranslate + Math.abs(yTranslate/2)}px) rotate(${270}deg)`, filter: 'brightness(1.0)', opacity: 1 },
+                    { transform: `translate(${xTranslate}px, ${yTranslate + Math.abs(yTranslate / 2)}px) rotate(${270}deg)`, filter: 'brightness(1.0)', opacity: 1 },
                     { transform: `translate(${xTranslate}px, ${yTranslate + Math.abs(yTranslate)}px) rotate(${360}deg)`, opacity: 0 }
                 ], {
                     duration: duration,
@@ -339,24 +339,24 @@ export default class App {
                 });
             });
         });
-      
-        gacha10.addEventListener('click', function() { gacha(this.dataset.count) });
-        gacha1.addEventListener('click', function() { gacha(this.dataset.count) });
-      
+
+        gacha10.addEventListener('click', function () { gacha(this.dataset.count) });
+        gacha1.addEventListener('click', function () { gacha(this.dataset.count) });
+
         function gacha(count) {
             const trackKeys = Database.getRandomTracksKey(count);
-          
+
             gridGachaModal.innerHTML = ''; // Reset HTML
             gachaModal.querySelector('.gacha-modal-body').scrollTop = 0;
             trackKeys.forEach((key, index) => {
                 const track = Database.trackMap.get(key);
                 const element = track.getGridItemElement();
                 gridGachaModal.appendChild(element);
-                
+
                 track.addActionDisplayHiddenItemFor(element.querySelector('.image-container'));
                 console.log(element.querySelector('.image-container'));
                 element.style.opacity = "0";
-                setTimeout(()=>{
+                setTimeout(() => {
                     element.style.opacity = "1";
                 }, (index + 1) * 100);
             });
@@ -366,12 +366,12 @@ export default class App {
     // Call when complete build app
     static completedBuildApp() {
         App.startSendAppStatus();
-        document.body.style.display = 'block';
-        window.addEventListener('load', ()=>{
+        document.querySelector('.loader-modal').classList.remove('show');
+        window.addEventListener('load', () => {
             const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
             console.log(`Loading time: ${loadTime} ms`);
         });
-        console.timeEnd(`Build app time`);        
+        console.timeEnd(`Build app time`);
     }
     static startSendAppStatus() {
         // Send status to the app that embeds this app

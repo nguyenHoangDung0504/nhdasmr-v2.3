@@ -2,6 +2,15 @@ import Database from "./models/Database.class.js";
 import App from "./app/App.class.js";
 import Config from "./app/Config.class.js";
 
+let synchronizedMenu = false;
+
+try {
+    Config.deviceIsMobile() || Config.openMenu();
+    synchronizedMenu = true;
+} catch (e) {
+    console.log(e);
+}
+
 // Hàm chờ tải CSV xong trước khi các script bên dưới chạy
 async function initializeApp() {
     try {
@@ -35,10 +44,10 @@ async function initializeApp() {
 
         document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', () => {
             App.build();
-            Config.deviceIsMobile() || Config.openMenu();
+            !synchronizedMenu || Config.deviceIsMobile() || Config.openMenu();
         }) : (() => {
             App.build();
-            Config.deviceIsMobile() || Config.openMenu();
+            !synchronizedMenu || Config.deviceIsMobile() || Config.openMenu();
         })();
     } catch (error) {
         console.error("Error initializing app:", error);

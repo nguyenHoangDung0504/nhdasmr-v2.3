@@ -177,8 +177,8 @@ input[type="text"]::selection {
     position: fixed;
     z-index: 99999;
     user-select: none;
-  color: white;
-/*     background: linear-gradient(0deg, var(--special-color), var(--special-color), deeppink, deeppink);
+    color: white;
+    /*     background: linear-gradient(0deg, var(--special-color), var(--special-color), deeppink, deeppink);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; */
@@ -435,7 +435,7 @@ body.openMenu>.menu {
     border-radius: 10px;
     width: 650px;
     height: auto;
-    z-index: 99999999999;
+    z-index: 9999999;
     pointer-events: none;
 }
 
@@ -455,7 +455,7 @@ body.openMenu>.menu {
 }
 
 .hidden-info .content-container h3 {
-  line-height: 1.5;
+    line-height: 1.5;
 }
 
 .hidden-info .image-container img {
@@ -695,6 +695,7 @@ body.openModel>.model-container {
     border-radius: 5px;
     box-shadow: 0 0 5px deeppink, 0 0 10px gold;
 }
+
 .gacha-modal-body .gacha-grid-container {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -707,7 +708,7 @@ body.openModel>.model-container {
 .gacha-modal-body .gacha-grid-container .grid-item {
     transition: var(--time);
     display: flex;
-/*     opacity: 0; */
+    /*     opacity: 0; */
     color: var(--text-color);
     border-radius: 5px;
     background-color: var(--bg);
@@ -781,144 +782,145 @@ body.openModel>.model-container {
 }
 
 /*NÚT GACHA*/
-    .special-button {
-        padding: 24px 100px;
-        height: fit-content;
-        user-select: none;
-        position: relative;
-        cursor: pointer;
-        width: fit-content;
-        --transition-time: .2s;
-        font-size: 18px;
-        font-weight: bold;
-        -webkit-tap-highlight-color: transparent;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    }
+.special-button {
+    padding: 24px 100px;
+    height: fit-content;
+    user-select: none;
+    position: relative;
+    cursor: pointer;
+    width: fit-content;
+    --transition-time: .2s;
+    font-size: 18px;
+    font-weight: bold;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 
-    .special-button::before {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        content: "Gacha x" attr(data-count);
-        display: grid;
-        place-content: center;
-        min-width: fit-content;
-        width: calc(100% - 5px);
-        height: calc(100% - 5px);
-        clip-path: polygon(0 50%, 15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%);
-        background: linear-gradient(45deg, gold, deeppink);
-        z-index: 1;
-        filter: drop-shadow(0 0 15px deeppink);
-    }
+.special-button::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    content: "Gacha x" attr(data-count);
+    display: grid;
+    place-content: center;
+    min-width: fit-content;
+    width: calc(100% - 5px);
+    height: calc(100% - 5px);
+    clip-path: polygon(0 50%, 15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%);
+    background: linear-gradient(45deg, gold, deeppink);
+    z-index: 1;
+    filter: drop-shadow(0 0 15px deeppink);
+}
 
-    .sub-special-button {
-        position: absolute;
-        top: -5%;
-        left: -5%;
-        width: 110%;
-        height: 110%;
-    }
+.sub-special-button {
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+}
 
-    .sub-special-button::before,
-    .sub-special-button::after {
-        transition: var(--transition-time);
-        content: "";
-        position: absolute;
-        height: 100%;
-        aspect-ratio: 0.8;
-        background: linear-gradient(90deg, deepskyblue, deeppink);
-    }
+.sub-special-button::before,
+.sub-special-button::after {
+    transition: var(--transition-time);
+    content: "";
+    position: absolute;
+    height: 100%;
+    aspect-ratio: 0.8;
+    background: linear-gradient(90deg, deepskyblue, deeppink);
+}
 
-    .sub-special-button::before {
-        clip-path: polygon(0% 0%, 90% 49%, -10% 100%, 54% 49%);
-        right: -5px;
-    }
+.sub-special-button::before {
+    clip-path: polygon(0% 0%, 90% 49%, -10% 100%, 54% 49%);
+    right: -5px;
+}
 
-    .sub-special-button.left::before {
-        left: -5px;
-        transform: scaleX(-1);
-    }
+.sub-special-button.left::before {
+    left: -5px;
+    transform: scaleX(-1);
+}
 
-    .sub-special-button::after {
-        clip-path: polygon(-50% 0%, 100% 49%, -10% 100%, 50% 49%);
-        right: -10px;
-    }
+.sub-special-button::after {
+    clip-path: polygon(-50% 0%, 100% 49%, -10% 100%, 50% 49%);
+    right: -10px;
+}
 
-    .sub-special-button.left::after {
-        left: -10px;
-        transform: scaleX(-1);
-    }
+.sub-special-button.left::after {
+    left: -10px;
+    transform: scaleX(-1);
+}
 
-    .special-button.active::before {
-        background: linear-gradient(45deg, gold, deeppink);
-        filter: brightness(1.2);
-    }
+.special-button.active::before {
+    background: linear-gradient(45deg, gold, deeppink);
+    filter: brightness(1.2);
+}
 
-    .special-button.active>.sub-special-button::before {
-        filter: brightness(1.5);
-        clip-path: polygon(-10% 0%, 100% 20%, 20% 100%, 50% 49%);
-        right: -10px;
-    }
+.special-button.active>.sub-special-button::before {
+    filter: brightness(1.5);
+    clip-path: polygon(-10% 0%, 100% 20%, 20% 100%, 50% 49%);
+    right: -10px;
+}
 
-    .special-button.active>.sub-special-button.left::before {
-        left: -10px;
-    }
+.special-button.active>.sub-special-button.left::before {
+    left: -10px;
+}
 
-    .special-button.active>.sub-special-button:after {
-        filter: brightness(1.5);
-        clip-path: polygon(-50% -10%, 100% 49%, 10% 100%, 50% 49%);
-        opacity: 0.7;
-    }
+.special-button.active>.sub-special-button:after {
+    filter: brightness(1.5);
+    clip-path: polygon(-50% -10%, 100% 49%, 10% 100%, 50% 49%);
+    opacity: 0.7;
+}
 
-    .shard {
-        position: absolute;
-        width: 15px;
-        height: 15px;
-        background: linear-gradient(45deg, deepskyblue, deeppink);
-        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-        opacity: 0;
-    }
+.shard {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: linear-gradient(45deg, deepskyblue, deeppink);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    opacity: 0;
+}
 
-    .shard-1 {
-        clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-    }
+.shard-1 {
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
 
-    .shard-2 {
-        clip-path: polygon(0 0, 100% 0, 0 100%);
-    }
+.shard-2 {
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+}
 
-    .shard-3 {
-        clip-path: polygon(100% 0, 100% 100%, 0 100%);
-    }
+.shard-3 {
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
 
-    .shard-4 {
-        clip-path: polygon(0 0, 100% 50%, 0 100%);
-    }
+.shard-4 {
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
 
-    .shard-5 {
-        clip-path: polygon(50% 0%, 100% 50%, 50% 100%);
-    }
+.shard-5 {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%);
+}
 
-    .shard-6 {
-        clip-path: polygon(0 0, 50% 0, 100% 100%);
-    }
+.shard-6 {
+    clip-path: polygon(0 0, 50% 0, 100% 100%);
+}
 
-    .shard-7 {
-        clip-path: polygon(50% 100%, 100% 0, 0 50%);
-    }
+.shard-7 {
+    clip-path: polygon(50% 100%, 100% 0, 0 50%);
+}
 
-    .shard-8 {
-        clip-path: polygon(100% 0, 100% 100%, 50% 50%);
-    }
+.shard-8 {
+    clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+}
 
-    .shard-9 {
-        clip-path: polygon(0 50%, 100% 50%, 50% 0%);
-    }
+.shard-9 {
+    clip-path: polygon(0 50%, 100% 50%, 50% 0%);
+}
 
-    .shard-10 {
-        clip-path: polygon(0 0, 50% 100%, 100% 0);
-    }
+.shard-10 {
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+}
+
 /*END NÚT GACHA*/
 
 /*END MODEL*/
@@ -1507,5 +1509,68 @@ input[type="text"].search::selection {
     :is(.text-container, #track-info) .series:before {
         content: "";
         margin-right: 0px;
+    }
+}
+
+body:has(.loader-modal.show) {
+    overflow: hidden;
+}
+
+.loader-modal {
+    display: none;
+    position: fixed;
+    pointer-events: none;
+}
+
+.loader-modal.show {
+    z-index: 999999999999;
+    display: flex;
+    top: 0;
+    right: 0;
+    background-color: #222;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100dvh;
+    pointer-events: all;
+}
+
+.loader-modal.show .loader {
+    --size: 100px;
+    width: var(--size);
+    aspect-ratio: 1/1;
+    background-image: conic-gradient(transparent 20%, #ffffff);
+    mask: radial-gradient(circle calc(var(--size) / 2.5),
+            transparent 100%,
+            #000000);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.displayer {
+    padding: 15px;
+    font-size: 18px;
+}
+
+.displayer:after {
+    content: attr(message);
+    color: white;
+}
+
+@media screen and (max-width: 780px) {
+    .loader-modal.show .loader {
+        --size: 55px;
+    }
+
+    .displayer {
+        padding: 10px;
+        font-size: 16px;
     }
 }
