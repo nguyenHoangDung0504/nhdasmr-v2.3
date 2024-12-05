@@ -8,15 +8,15 @@ export default class Config {
     }
     // Menu Configs
     static menuIsOpen() {
-        return Array.from(document.body.classList).indexOf('openMenu') != -1;
+        return document.documentElement.classList.contains('openMenu');
     }
     static openMenu() {
         if (!Config.menuIsOpen())
-            document.body.classList.add('openMenu');
+            document.documentElement.classList.add('openMenu');
     }
     static closeMenu() {
         if (Config.menuIsOpen())
-            document.body.classList.remove('openMenu');
+            document.documentElement.classList.remove('openMenu');
     }
     static toggleMenu() {
         if (Config.menuIsOpen()) {

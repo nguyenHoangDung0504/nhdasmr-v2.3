@@ -80,7 +80,7 @@ body p.message {
     line-height: 1.75;
 }
 
-body.openMenu p.message {
+html.openMenu > body p.message {
     transition: margin var(--time);
     color: var(--text-color);
     display: block;
@@ -88,22 +88,22 @@ body.openMenu p.message {
     margin: calc(var(--screen-width) * .02);
 }
 
-body.openMenu .close-menu {
+html.openMenu > body .close-menu {
     display: block;
     cursor: pointer;
 }
 
-body.openMenu .content {
+html.openMenu > body .content {
     --number-col: 4;
     grid-template-columns: calc(var(--screen-width) * 0.185) calc(var(--screen-width) * 0.7991) calc(var(--screen-width) * 0.012);
 }
 
-body.openMenu p.message {
+html.openMenu > body p.message {
     margin-left: calc(var(--screen-width) * 0.2);
 }
 
-body.openMenu .footer,
-body.openMenu .pagination {
+html.openMenu > body .footer,
+html.openMenu > body .pagination {
     margin-left: calc(calc(var(--screen-width) * 0.185) - 20px);
     width: calc(100% - calc(calc(var(--screen-width) * 0.185) - 20px));
 }
@@ -414,7 +414,7 @@ input[type="text"]::selection {
     text-decoration: underline;
 }
 
-body.openMenu>.menu {
+html.openMenu > body > .menu {
     left: 0;
 }
 
@@ -559,11 +559,11 @@ body.openMenu>.menu {
     font-size: 15px;
 }
 
-body:not(.openMenu) .content .grid-container .grid-item {
+html:not(.openMenu) > body .content .grid-container .grid-item {
     padding: 12px 12px;
 }
 
-body:not(.openMenu) .content .grid-container .grid-item .flex-container .text-container {
+html:not(.openMenu) > body .content .grid-container .grid-item .flex-container .text-container {
     font-size: 14px;
 }
 
@@ -627,6 +627,7 @@ body:not(.openMenu) .content .grid-container .grid-item .flex-container .text-co
 .content .grid-container .grid-item .flex-container .text-container .multiline-ellipsis {
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     /* Số dòng tối đa trước khi cắt ngắn */
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -754,6 +755,7 @@ body.openModel>.model-container {
 .gacha-modal-body .gacha-grid-container .grid-item .flex-container .text-container .multiline-ellipsis {
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     /* Số dòng tối đa trước khi cắt ngắn */
     -webkit-box-orient: vertical;
     overflow: hidden;
