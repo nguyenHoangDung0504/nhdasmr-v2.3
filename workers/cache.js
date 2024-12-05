@@ -91,17 +91,17 @@ self.addEventListener("fetch", (event) => {
 });
 
 // Xóa cache cũ khi service worker mới được kích hoạt
-self.addEventListener("activate", (event) => {
-    const cacheWhitelist = [CACHE_NAME];
-    event.waitUntil(
-        caches.keys().then((cacheNames) =>
-            Promise.all(
-                cacheNames.map((cacheName) => {
-                    if (!cacheWhitelist.includes(cacheName)) {
-                        return caches.delete(cacheName);
-                    }
-                })
-            )
-        )
-    );
-});
+// self.addEventListener("activate", (event) => {
+//     const cacheWhitelist = [CACHE_NAME];
+//     event.waitUntil(
+//         caches.keys().then((cacheNames) =>
+//             Promise.all(
+//                 cacheNames.map((cacheName) => {
+//                     if (!cacheWhitelist.includes(cacheName)) {
+//                         return caches.delete(cacheName);
+//                     }
+//                 })
+//             )
+//         )
+//     );
+// });
