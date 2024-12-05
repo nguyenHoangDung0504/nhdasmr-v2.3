@@ -21,11 +21,16 @@ const urlsToCache = [
     "/app/components/ZoomableContainer.component.js",
     "/models/classes.js",
     "/models/Database.class.js",
-    "/data/s1.csv",
 ];
 const CACHE_EXPIRATION = 5 * 60 * 1000; // 5 phút
 
 async function cacheWithTimestamp(cache, request, response) {
+    // Kiểm tra nếu URL nằm trong danh sách urlsToCache
+    if (!urlsToCache.includes(new URL(request.url).pathname)) {
+        console.log("Skipping caching for:", request.url);
+        return;
+    }
+
     if (!response.ok) {
         console.error(`Failed to fetch ${request.url}: ${response.status}`);
         return;
