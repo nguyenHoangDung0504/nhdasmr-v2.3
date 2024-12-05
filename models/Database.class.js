@@ -277,10 +277,10 @@ export default class Database {
         });
         console.timeEnd('Build Database Time');
         console.log('Added:', Database.keyList.length, 'Tracks');
-        console.log('Complete build tracks map:', Database.trackMap);
-        console.log('Complete build CVs map:', Database.cvMap);
-        console.log('Complete build tags map:', Database.tagMap);
-        console.log('Complete build series map:', Database.seriesMap);
+        Database.config.log && console.log('Complete build tracks map:', Database.trackMap);
+        Database.config.log && console.log('Complete build CVs map:', Database.cvMap);
+        Database.config.log && console.log('Complete build tags map:', Database.tagMap);
+        Database.config.log && console.log('Complete build series map:', Database.seriesMap);
         if(Database.config.test)
             Database.testingFunctions();
         if(Database.config.clearLog)
