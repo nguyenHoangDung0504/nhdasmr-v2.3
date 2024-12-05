@@ -5,15 +5,15 @@ import Config from "./Config.class.js";
 export default class AltPlayer {
     static urlParams = new URLSearchParams(window.location.search);
     static isPortrait = false;
-    static reuableElements = {
-        elem: document.documentElement,
-        fullscreenBtn: document.querySelector('#fullscreen-btn'),
-        fullscreenIcon: document.querySelector('#fullscreen-btn i'),
-        contentContainer: document.querySelector('.content-container'),
-        mp3Container: document.querySelector('.menu-mp3')
-    }
 
     static build() {
+        AltPlayer.reuableElements = {
+            elem: document.documentElement,
+            fullscreenBtn: document.querySelector('#fullscreen-btn'),
+            fullscreenIcon: document.querySelector('#fullscreen-btn i'),
+            contentContainer: document.querySelector('.content-container'),
+            mp3Container: document.querySelector('.menu-mp3')
+        }
         AltPlayer.trackKey = AltPlayer.urlParams.get("code");
         AltPlayer.track = Database.getTrackByIdentify(AltPlayer.trackKey);
         if(!AltPlayer.track) {

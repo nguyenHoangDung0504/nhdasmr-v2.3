@@ -22,12 +22,14 @@ const urlsToCache = [
     "/models/classes.js",
     "/models/Database.class.js",
 ];
+
 const CACHE_EXPIRATION = 5 * 60 * 1000; // 5 phút
+const log = false;
 
 async function cacheWithTimestamp(cache, request, response) {
     // Kiểm tra nếu URL nằm trong danh sách urlsToCache
     if (!urlsToCache.includes(new URL(request.url).pathname)) {
-        console.log("Skipping caching for:", request.url);
+        log && console.log("Skipping caching for:", request.url);
         return;
     }
 
@@ -72,7 +74,7 @@ self.addEventListener("fetch", (event) => {
         caches.open(CACHE_NAME).then(async (cache) => {
             const cachedResponse = await cache.match(event.request);
             if (cachedResponse) {
-                console.log(`Cache hit: ${event.request.url}`);
+                log && console.log(`Cache hit: ${event.request.url}`);
                 return cachedResponse;
             }
 

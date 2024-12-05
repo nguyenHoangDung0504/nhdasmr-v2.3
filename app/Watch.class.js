@@ -2,12 +2,12 @@ import Database from "../models/Database.class.js";
 import Config from "./Config.class.js";
 
 export default class Watch {
-    static reuableElements = {
-        contentDiv: document.querySelector('.content_div'),
-        postBox: document.querySelector('.post-box'),
-    }
-
     static build() {
+        Watch.reuableElements = {
+            contentDiv: document.querySelector('.content_div'),
+            postBox: document.querySelector('.post-box'),
+        };
+
         Watch.urlParams = new URLSearchParams(window.location.search);
         Watch.trackKey = Watch.urlParams.get('code') || Watch.urlParams.get('rjcode');
         Watch.track = Database.getTrackByIdentify(Watch.trackKey);

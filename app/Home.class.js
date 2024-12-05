@@ -4,21 +4,21 @@ import Utils from "../Utils.class.js";
 import Config from "./Config.class.js";
 
 export default class Home {
-    static urlParams = new URLSearchParams(window.location.search);
-    static page = Number(Home.urlParams.get('page') || 1);
-    static cv = Home.urlParams.get('cv');
-    static tag = Home.urlParams.get('tag');
-    static series = Home.urlParams.get('series');
-    static sort = Home.urlParams.get('sort');
-    static search = Home.urlParams.get('search') || Home.urlParams.get('s');
-    static reuableElements = {
-        messageBox: document.querySelector('.message'),
-        hiddenDataContainer: document.querySelector('.hidden-data-container'),
-        gridContainer: document.querySelector('.grid-container'),
-        paginationBody: document.querySelector('.pagination-body'),
-    }
-
     static build() {
+        Home.urlParams = new URLSearchParams(window.location.search);
+        Home.page = Number(Home.urlParams.get('page') || 1);
+        Home.cv = Home.urlParams.get('cv');
+        Home.tag = Home.urlParams.get('tag');
+        Home.series = Home.urlParams.get('series');
+        Home.sort = Home.urlParams.get('sort');
+        Home.search = Home.urlParams.get('search') || Home.urlParams.get('s');
+        Home.reuableElements = {
+            messageBox: document.querySelector('.message'),
+            hiddenDataContainer: document.querySelector('.hidden-data-container'),
+            gridContainer: document.querySelector('.grid-container'),
+            paginationBody: document.querySelector('.pagination-body'),
+        };
+
         Home.keyList = Database.keyList;
         Home.setMessage('NHD Hentai - ASMR Hentai Tracks');
         Home.filterKeyList();

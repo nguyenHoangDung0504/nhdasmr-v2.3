@@ -5,8 +5,8 @@ import { Cv, OtherLink, SearchResult, Series, Tag, Track } from "./classes.js";
 console.time('Build Database Time');
 export default class Database {
     static config = {
-        log: true,
-        test: true,
+        log: false,
+        test: false,
         clearLog: false,
     };
     static categoryType = {
