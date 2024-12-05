@@ -11,12 +11,16 @@ export default class Config {
         return document.documentElement.classList.contains('openMenu');
     }
     static openMenu() {
-        if (!Config.menuIsOpen())
+        if (!Config.menuIsOpen()){
             document.documentElement.classList.add('openMenu');
+            localStorage.setItem('open-menu', '-');
+        }
     }
     static closeMenu() {
-        if (Config.menuIsOpen())
+        if (Config.menuIsOpen()){
             document.documentElement.classList.remove('openMenu');
+            localStorage.clear('open-menu');
+        }
     }
     static toggleMenu() {
         if (Config.menuIsOpen()) {
@@ -63,4 +67,11 @@ export default class Config {
         }
         Config.closeFullscreen();
     }
+}
+
+if(!window.location.href.includes('watch')) {
+    if(localStorage.getItem('open-menu'))
+        Config.openMenu();
+    else
+        Config.closeMenu();
 }

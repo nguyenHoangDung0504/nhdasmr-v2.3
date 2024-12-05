@@ -42,13 +42,7 @@ async function initializeApp() {
             return line;
         }));
 
-        document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', () => {
-            App.build();
-            !synchronizedMenu || Config.deviceIsMobile() || Config.openMenu();
-        }) : (() => {
-            App.build();
-            !synchronizedMenu || Config.deviceIsMobile() || Config.openMenu();
-        })();
+        document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', App.build) : App.build();
     } catch (error) {
         console.error("Error initializing app:", error);
     }
