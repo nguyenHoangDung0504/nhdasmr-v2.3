@@ -13,13 +13,11 @@ export default class Config {
     static openMenu() {
         if (!Config.menuIsOpen()){
             document.documentElement.classList.add('openMenu');
-            localStorage.setItem('open-menu', '-');
         }
     }
     static closeMenu() {
         if (Config.menuIsOpen()){
             document.documentElement.classList.remove('openMenu');
-            localStorage.removeItem('open-menu');
         }
     }
     static toggleMenu() {
@@ -67,11 +65,4 @@ export default class Config {
         }
         Config.closeFullscreen();
     }
-}
-
-if(!window.location.href.includes('watch')) {
-    if(localStorage.getItem('open-menu'))
-        Config.openMenu();
-    else
-        Config.closeMenu();
 }

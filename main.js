@@ -2,15 +2,6 @@ import Database from "./models/Database.class.js";
 import App from "./app/App.class.js";
 import Config from "./app/Config.class.js";
 
-let synchronizedMenu = false;
-
-try {
-    Config.deviceIsMobile() || Config.openMenu();
-    synchronizedMenu = true;
-} catch (e) {
-    console.log(e);
-}
-
 // Hàm chờ tải CSV xong trước khi các script bên dưới chạy
 async function initializeApp() {
     try {
@@ -134,7 +125,7 @@ async function getCSVData(url) {
 
 if ('serviceWorker' in navigator) {
     console.log('Service Worker registering...');
-    navigator.serviceWorker.register('/workers/cache.js')
+    navigator.serviceWorker.register('/cache.js')
         .then(() => console.log('Service Worker registered.'))
         .catch((err) => console.error('Service Worker registration failed:', err));
 }
