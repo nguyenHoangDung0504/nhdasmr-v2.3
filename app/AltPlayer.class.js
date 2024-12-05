@@ -1,9 +1,9 @@
-'use strict';
+import { AudioController, AudioPlayer, ImageDisplayer, VideoPlayer } from "../models/classes.js";
+import Database from "../models/Database.class.js";
+import Config from "./Config.class.js";
 
-class AltPlayer {
+export default class AltPlayer {
     static urlParams = new URLSearchParams(window.location.search);
-    static trackKey = AltPlayer.urlParams.get("code");
-    static track = Database.getTrackByIdentify(AltPlayer.trackKey);
     static isPortrait = false;
     static reuableElements = {
         elem: document.documentElement,
@@ -14,6 +14,8 @@ class AltPlayer {
     }
 
     static build() {
+        AltPlayer.trackKey = AltPlayer.urlParams.get("code");
+        AltPlayer.track = Database.getTrackByIdentify(AltPlayer.trackKey);
         if(!AltPlayer.track) {
             alert('Code not found!');
             return;
@@ -134,4 +136,3 @@ class AltPlayer {
         }
     }
 }
-AltPlayer.build();

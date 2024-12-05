@@ -1,7 +1,9 @@
-'use strict';
+import Config from "../app/Config.class.js";
+import Utils from "../Utils.class.js";
+import { Cv, OtherLink, SearchResult, Series, Tag, Track } from "./classes.js";
 
 console.time('Build Database Time');
-class Database {
+export default class Database {
     static config = {
         log: true,
         test: true,
@@ -18,6 +20,11 @@ class Database {
     static tagMap = new Map();
     static seriesMap = new Map();
     static keyList = [];
+
+    static setData(data) {
+        data.forEach(record => Database.addTrackToDatabase(...record));
+        Database.completeBuild();
+    }
 
     static addTrackToDatabase(code, rjCode, cvs, tags, series, engName, japName, thumbnail, images, audios, otherLinks = undefined) {
         [cvs, tags, series, images, audios] = [cvs, tags, series, images, audios].map(member => {
@@ -303,13 +310,4 @@ class Database {
         Config.log = false;
         Database.config.log = false;
     }
-}
-
-(() => {
-    window.data.forEach(record => at(...record));
-    Database.completeBuild();
-})();
-
-function at(code, rjCode, cvs, tags, series, engName, japName, thumbnail, images, audios, otherLink) {
-    Database.addTrackToDatabase(...arguments);
 }

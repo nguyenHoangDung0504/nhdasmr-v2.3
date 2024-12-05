@@ -58,7 +58,7 @@ class ZoomableContainer extends HTMLElement {
         this.content = this.shadowRoot.querySelector('[part="content"]');
 
         // Xử lý cuộn để thu phóng (desktop)
-        this.addEventListener('wheel', this.handleWheelZoom.bind(this));
+        this.addEventListener('wheel', this.handleWheelZoom.bind(this), { passive: false });
 
         // Xử lý kéo thả để xem nội dung được thu phóng (desktop)
         this.addEventListener('mousedown', this.handleMouseDown.bind(this));

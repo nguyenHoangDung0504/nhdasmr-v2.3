@@ -1,17 +1,18 @@
-// Biến toàn cục để lưu trữ dữ liệu CSV
-window.data = null;
+import AltPlayer from "../../app/AltPlayer.class.js";
+import Database from "../../models/Database.class.js";
 
 // Hàm chờ tải CSV xong trước khi các script bên dưới chạy
 async function initializeApp() {
     try {
         // Tải dữ liệu CSV
-        const csvData = await getCSVData("data/s1.csv");
-        const { cv, tag, series: seriess, tracks: trackss, url_prefix } = parseCombinedFile(csvData);
+        const csvData = await getCSVData("/data/s1.csv");
+        const { cv, tag, series: seriess, tracks, url_prefix } = parseCombinedFile(csvData);
         const cvs = new Map(cv.split('\n').filter(Boolean).map(line => line.split(',').splice(0, 2)));
         const tags = new Map(tag.split('\n').filter(Boolean).map(line => line.split(',').splice(0, 2)));
         const series = new Map(seriess.split('\n').filter(Boolean).map(line => line.split(',').splice(0, 2)));
         const url_prefixs = new Map(url_prefix.split('\n').filter(Boolean).map(line => line.split(',')));
-        const tracks = trackss.split('\n').filter(Boolean).map(line => {
+        
+        Database.setData(tracks.split('\n').filter(Boolean).map(line => {
             line = parseTrackLine(line);
             line[0] = parseInt(line[0]);
 
@@ -29,58 +30,13 @@ async function initializeApp() {
             }
 
             return line;
-        });
-        
-        console.log(tracks);
-        window.data = tracks;
+        }));
 
-        // Sau khi có dữ liệu, thêm các script trong head
-        const scriptsToLoad = [
-            "/app/components/ZoomableContainer.component.js",
-            "/Utils.class.js",
-            "/models/classes.js",
-            "/app/Config.class.js",
-            "/models/Database.class.js"
-        ];
-
-        for (const scriptSrc of scriptsToLoad) {
-            const script = document.createElement("script");
-            script.src = scriptSrc;
-            document.head.appendChild(script);
-        }
-
-        // Chờ tất cả script trong head load xong
-        await Promise.all(
-            scriptsToLoad.map(
-                (src) =>
-                    new Promise((resolve) => {
-                        const script = document.querySelector(`script[src="${src}"]`);
-                        script.onload = resolve;
-                    })
-            )
-        );
-
-        // Khi script trong head xong, thêm script dưới body
-        const bodyScripts = [
-            "/app/AltPlayer.class.js"
-        ];
-
-        for (const scriptSrc of bodyScripts) {
-            const script = document.createElement("script");
-            script.src = scriptSrc;
-            document.body.appendChild(script);
-        }
-
-        // Chờ tất cả script trong body load xong
-        await Promise.all(
-            bodyScripts.map(
-                (src) =>
-                    new Promise((resolve) => {
-                        const script = document.querySelector(`script[src="${src}"]`);
-                        script.onload = resolve;
-                    })
-            )
-        );
+        document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', () => {
+            AltPlayer.build();
+        }) : (() => {
+            AltPlayer.build();
+        })();
     } catch (error) {
         console.error("Error initializing app:", error);
     }

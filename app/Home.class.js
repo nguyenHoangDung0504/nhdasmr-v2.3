@@ -1,6 +1,9 @@
-'use strict';
+import { Track } from "../models/classes.js";
+import Database from "../models/Database.class.js";
+import Utils from "../Utils.class.js";
+import Config from "./Config.class.js";
 
-class Home {
+export default class Home {
     static urlParams = new URLSearchParams(window.location.search);
     static page = Number(Home.urlParams.get('page') || 1);
     static cv = Home.urlParams.get('cv');
@@ -14,9 +17,9 @@ class Home {
         gridContainer: document.querySelector('.grid-container'),
         paginationBody: document.querySelector('.pagination-body'),
     }
-    static keyList = Database.keyList;
 
     static build() {
+        Home.keyList = Database.keyList;
         Home.setMessage('NHD Hentai - ASMR Hentai Tracks');
         Home.filterKeyList();
 

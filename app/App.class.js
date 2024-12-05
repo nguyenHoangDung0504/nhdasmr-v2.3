@@ -1,8 +1,13 @@
-'use strict';
+import { SwipeHandler } from "../models/classes.js";
+import Database from "../models/Database.class.js";
+import Utils from "../Utils.class.js";
+import Config from "./Config.class.js";
+import Home from "./Home.class.js";
+import Watch from "./Watch.class.js";
 
-const urlParams = new URLSearchParams(window.location.search);
+window.urlParams = new URLSearchParams(window.location.search);
 
-class App {
+export default class App {
     static types = {
         HOME: 0,
         WATCH: 1
@@ -370,7 +375,7 @@ class App {
     }
     static startSendAppStatus() {
         // Send status to the app that embeds this app
-        parent.postMessage({ type: 'urlChange', version: 2.2, url: window.location.href }, '*');
+        parent.postMessage({ type: 'urlChange', version: 2.3, url: window.location.href }, '*');
         setInterval(() => parent.postMessage({ type: 'alive' }, '*'), 3000);
         window.addEventListener('beforeunload', () => parent.postMessage({ type: 'beforeUnload' }, '*'));
     }

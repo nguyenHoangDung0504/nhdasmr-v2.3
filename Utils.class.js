@@ -1,4 +1,6 @@
-class Utils {
+import Config from "./app/Config.class.js";
+
+export default class Utils {
     static getGroupOfPagination(currentPage, pagePerGroup, limitPage) {
         pagePerGroup = pagePerGroup > limitPage ? limitPage : pagePerGroup;
 

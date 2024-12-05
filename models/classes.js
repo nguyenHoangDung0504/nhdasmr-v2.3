@@ -1,4 +1,6 @@
-'use strict';
+import App from "../app/App.class.js";
+import Utils from "../Utils.class.js";
+import Database from "./Database.class.js";
 
 const s2 = window.location.href.includes('s2') ? '/s2' : '';
 
@@ -196,8 +198,8 @@ class SwipeHandler {
     registerEvents() {
         this.element.addEventListener('mousedown', this.handleMouseDown.bind(this));
         this.element.addEventListener('mouseup', this.handleMouseUp.bind(this));
-        this.element.addEventListener('touchstart', this.handleTouchStart.bind(this));
-        this.element.addEventListener('touchend', this.handleTouchEnd.bind(this));
+        this.element.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: true });
+        this.element.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: true });
     }
     handleMouseDown(event) {
         if (event.target.tagName === "IMG")
@@ -527,7 +529,7 @@ class AudioController {
             this.isDragging = true;
             this.pause();
             this.touchStartX = event.touches[0].clientX;
-        });
+        }, { passive: true });
 
         this.seekBar.addEventListener('touchend', () => {
             this.isDragging = false;
@@ -554,7 +556,7 @@ class AudioController {
                 this.audio.dataset.timeChange = Math.abs(currentTimeAfter - currentTimeBefore);
                 this.audio.currentTime = currentTimeAfter;
             }
-        });
+        }, { passive: true });
 
         this.audContainer.appendChild(this.audio);
         this.audContainer.appendChild(this.seekBar);
@@ -640,3 +642,9 @@ class AudioPlayer {
 }
 
 Utils.memoizeGetAndSearchMethods(Track, Cv, Tag, Series, SearchResult, OtherLink);
+
+export {
+    Track, Cv, Tag, Series, SearchResult, 
+    OtherLink, SwipeHandler, VideoPlayer, 
+    ImageDisplayer, AudioController, AudioPlayer
+}
