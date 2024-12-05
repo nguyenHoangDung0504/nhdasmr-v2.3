@@ -340,8 +340,8 @@ export default class App {
             });
         });
 
-        gacha10.addEventListener('click', function () { gacha(this.dataset.count) });
-        gacha1.addEventListener('click', function () { gacha(this.dataset.count) });
+        gacha10.addEventListener('click', () => gacha(this.dataset.count));
+        gacha1.addEventListener('click', () => gacha(this.dataset.count));
 
         function gacha(count) {
             const trackKeys = Database.getRandomTracksKey(count);
@@ -354,7 +354,7 @@ export default class App {
                 gridGachaModal.appendChild(element);
 
                 track.addActionDisplayHiddenItemFor(element.querySelector('.image-container'));
-                console.log(element.querySelector('.image-container'));
+                Config.log && console.log(element.querySelector('.image-container'));
                 element.style.opacity = "0";
                 setTimeout(() => {
                     element.style.opacity = "1";
