@@ -19,7 +19,7 @@ export default class Config {
     static closeMenu() {
         if (Config.menuIsOpen()){
             document.documentElement.classList.remove('openMenu');
-            localStorage.clear('open-menu');
+            localStorage.removeItem('open-menu');
         }
     }
     static toggleMenu() {
