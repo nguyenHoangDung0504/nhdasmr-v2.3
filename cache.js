@@ -74,7 +74,7 @@ self.addEventListener("fetch", (event) => {
 
     // Chỉ xử lý nếu URL nằm trong danh sách urlsToCache
     if (!urlsToCache.includes(requestUrl.pathname)) {
-        log && console.log("Skipping caching for:", request.url);
+        log && console.log("Skipping fetch and caching for:", request.url);
         return;
     }
 
