@@ -43,14 +43,14 @@ async function cacheWithTimestamp(cache, request, response) {
 }
 
 // Helper: Lấy metadata của cache
-async function getCacheMetadata(cache, request) {
-    const metadataRequest = `${request.url}-metadata`;
-    const metadataResponse = await cache.match(metadataRequest);
-    if (!metadataResponse) return null;
+// async function getCacheMetadata(cache, request) {
+//     const metadataRequest = `${request.url}-metadata`;
+//     const metadataResponse = await cache.match(metadataRequest);
+//     if (!metadataResponse) return null;
 
-    const metadataText = await metadataResponse.text();
-    return JSON.parse(metadataText);
-}
+//     const metadataText = await metadataResponse.text();
+//     return JSON.parse(metadataText);
+// }
 
 // Cài đặt cache khi service worker được cài đặt
 self.addEventListener("install", (event) => {
@@ -70,6 +70,14 @@ self.addEventListener("install", (event) => {
 
 // Trong sự kiện 'fetch', kiểm tra tình trạng của response:
 self.addEventListener("fetch", (event) => {
+    const requestUrl = new URL(event.request.url);
+
+    // Chỉ xử lý nếu URL nằm trong danh sách urlsToCache
+    if (!urlsToCache.includes(requestUrl.pathname)) {
+        log && console.log("Skipping caching for:", request.url);
+        return;
+    }
+
     event.respondWith(
         caches.open(CACHE_NAME).then(async (cache) => {
             const cachedResponse = await cache.match(event.request);
