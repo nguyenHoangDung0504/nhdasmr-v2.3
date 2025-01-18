@@ -451,7 +451,8 @@ class AudioController {
         this.currentTime = 0;
         this.touchStartX = 0;
         this.time = 3;
-        this.filename = Utils.getFileNameFromUrl(src);
+        // this.filename = Utils.getFileNameFromUrl(src);
+        this.filename = src.slice(src.lastIndexOf('/')+1, src.lastIndexOf('.'));
 
         this.audContainer = document.createElement('div');
         this.audio = document.createElement('audio');
