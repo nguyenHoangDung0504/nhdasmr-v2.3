@@ -28,6 +28,7 @@ async function initializeApp() {
             line[9] = line[9].split(',').map(col => parseEncodedURL(col)).join(',');
 
             function parseEncodedURL(encodedURL) {
+                if (encodedURL.trim().length === 0) return '';
                 encodedURL = encodedURL.split('->');
                 return url_prefixs.get(encodedURL[0]) + encodedURL[1];
             }

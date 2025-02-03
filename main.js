@@ -1,6 +1,5 @@
 import Database from "./models/Database.class.js";
 import App from "./app/App.class.js";
-import Config from "./app/Config.class.js";
 
 // Hàm chờ tải CSV xong trước khi các script bên dưới chạy
 async function initializeApp() {
@@ -12,8 +11,8 @@ async function initializeApp() {
         const tags = new Map(tag.split('\n').filter(Boolean).map(line => line.split(',').splice(0, 2)));
         const series = new Map(seriess.split('\n').filter(Boolean).map(line => line.split(',').splice(0, 2)));
         const url_prefixs = new Map(url_prefix.split('\n').filter(Boolean).map(line => line.split(',')));
-
-        Database.setData(tracks.split('\n').filter(Boolean).map(line => {
+        
+        Database.setData(tracks.split('\n').filter(Boolean).map((line, i) => {
             line = parseTrackLine(line);
             line[0] = parseInt(line[0]);
 
@@ -26,6 +25,7 @@ async function initializeApp() {
             line[9] = line[9].split(',').map(col => parseEncodedURL(col)).join(',');
 
             function parseEncodedURL(encodedURL) {
+                if (encodedURL.trim().length === 0) return '';
                 encodedURL = encodedURL.split('->');
                 return url_prefixs.get(encodedURL[0]) + encodedURL[1];
             }
@@ -89,7 +89,6 @@ function parseTrackLine(line) {
         }
     }
 
-    values.push(current.trim());
     return values;
 }
 
