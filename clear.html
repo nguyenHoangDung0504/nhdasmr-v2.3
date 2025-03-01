@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        async function unregisterServiceWorkerAndClearCache() {
+            // Hủy đăng ký tất cả Service Workers
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                for (let registration of registrations) {
+                    await registration.unregister();
+                    console.log('--> [Client]: Service Worker unregistered');
+                }
+            }
+
+            // Xóa toàn bộ cache
+            if ('caches' in window) {
+                const cacheNames = await caches.keys();
+                for (let cacheName of cacheNames) {
+                    await caches.delete(cacheName);
+                    console.log(`--> [Client]: Cache deleted: ${cacheName}`);
+                }
+            }
+
+            console.log('--> [Client]: All caches cleared');
+        }
+
+        // Gọi hàm để xóa cache và hủy Service Worker
+        unregisterServiceWorkerAndClearCache();
+
+    </script>
+</body>
+
+</html>

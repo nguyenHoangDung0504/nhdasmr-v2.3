@@ -41,7 +41,6 @@ export default class Database {
         });
 
         const track = new Track(code, rjCode, cvs, tags, series, engName, japName, thumbnail, images, audios, otherLinks);
-        console.log(track);
         if (!track.images.includes(track.thumbnail)) 
             track.images.unshift(track.thumbnail);
         Database.trackKeyMap.set(rjCode, code);
